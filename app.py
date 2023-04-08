@@ -1,15 +1,34 @@
-from flask import Flask
-from flask import render_template
+import os
+import openai
+
+from flask import Flask, render_template, request
 
 app = Flask(__name__, static_folder="static", static_url_path="/static")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    return render_template("index.html", message="AI 자동 일기 쓰기")
-
-@app.route("/hello")
-def hello():
-    return render_template("hello.html", message="Hello, World!")
+    if request.method == "POST":
+        weather = request.form["weather"]
+        mood = request.form["mood"]
+        content = request.form["content"]
+        image = openai.Image.create(
+            prompt=f"{mood}, pixel art",
+            n=1,
+            size="1024x1024"
+        )
+        title = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+        {"role": "user", "content": f"'날씨:{weather},기분:{mood},사건:{content}'의 내용으로 쓸 일기의 제목을 유머러스하게 적어줘. "},
+    ])
+        contents = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+        {"role": "user", "content": f"'날씨:{weather},기분:{mood},사건:{content}' 의 내용으로 5줄로 일기를 적어줘"},
+    ])
+        return render_template("result.html", title=title.choices[0].message.content, contents=contents.choices[0].message.content, image_url = image['data'][0]['url'])
+    return render_template("write.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
