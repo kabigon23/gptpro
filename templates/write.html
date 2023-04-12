@@ -1,70 +1,107 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
-    <h1>AI 그림일기</h1>
+<div class="container m-3">
+    <div>
+        <h1 class="text-center">일기장</h1>
+    </div>
+    <form method="POST" action="/">
+        <div class="mb-3">
+            <label for="subject" class="form-label fs-3" >제목</label>
+            <div class="row g-3">
+                <div class="col-7">
+                    <input class="form-control form-control-lg" placeholder="20자 이내로 적어주세요." name="subject" type="text" id="subject" />
+                </div>    
+            </div>
+            
+        </div>
+        <div class="mb-3">
+            <div class="fs-3 mb-1">날씨</div>
+        <div>
+            <input class="btn-check" type="radio" name="weather" id="sunny" value="sunny" required>
+            <label class="btn btn-outline-primary" for="sunny">맑음</label>
+    
+            <input class="btn-check" type="radio" name="weather" id="cloudy" value="cloudy">
+            <label class="btn btn-outline-primary" for="cloudy">흐림</label>
+    
+            <input class="btn-check" type="radio" name="weather" id="snowy" value="snowy">
+            <label class="btn btn-outline-primary" for="snowy">눈</label>
+    
+            <input class="btn-check" type="radio" name="weather" id="foggy" value="foggy">
+            <label class="btn btn-outline-primary" for="foggy">안개</label>
+    
+            <input class="btn-check" type="radio" name="weather" id="rainy" value="rainy">
+            <label class="btn btn-outline-primary" for="rainy">비</label>
+    
+            <input class="btn-check" type="radio" name="weather" id="hail" value="hail">
+            <label class="btn btn-outline-primary" for="hail">우박</label>
+        </div>
+        </div>
+        
+    
+    
+    
+        <div class="mb-1 fs-3">감정</div>
+        <div class="row">
+            <div class="col-auto">
+                <input class="btn-check" type="radio" name="mood" id="happy" value="happy" required>
+                <label class="btn btn-outline-primary" for="happy">행복함</label>
+            </div>
+            
+            <div class="col-auto">
+                <input class="btn-check" type="radio" name="mood" id="pleasure" value="pleasure">
+                <label class="btn btn-outline-primary" for="pleasure">즐거움</label>
+            </div>
+            
+            <div class="col-auto">
+                <input class="btn-check" type="radio" name="mood" id="sad" value="sad">
+                <label class="btn btn-outline-primary" for="sad">슬  픔</label>
+            </div>
+            <div class="col-auto">
+                <input class="btn-check" type="radio" name="mood" id="angry" value="angry">
+                <label class="btn btn-outline-primary" for="angry">화  남</label>
+            </div>
+            <div class="col-auto">
+                <input class="btn-check" type="radio" name="mood" id="annoyed" value="annoyed">
+                <label class="btn btn-outline-primary" for="annoyed">짜증남</label>
+            </div>            
+        </div>
+        <div class="row mb-3">
+            <div class="col-auto">
+              <input class="btn-check" type="radio" name="mood" id="depression" value="depression">
+              <label class="btn btn-outline-primary" for="depression">우울함</label>
+            </div>
+            <div class="col-auto">
+              <input class="btn-check" type="radio" name="mood" id="lonely" value="lonely">
+              <label class="btn btn-outline-primary" for="lonely">외로움</label>
+            </div>
+            <div class="col-auto">
+              <input class="btn-check" type="radio" name="mood" id="nervous" value="nervous">
+              <label class="btn btn-outline-primary" for="nervous">긴  장</label>
+            </div>
+            <div class="col-auto">
+              <input class="btn-check" type="radio" name="mood" id="excitement" value="excitement">
+              <label class="btn btn-outline-primary" for="excitement">설  렘</label>
+            </div>
+            <div class="col-auto">
+              <input class="btn-check" type="radio" name="mood" id="hopeless" value="hopeless">
+              <label class="btn btn-outline-primary" for="hopeless">절망함</label>
+            </div>
+        </div>
+          
+        <div class="mb-3">
+            <label for="content" class="form-label fs-3" >사건</label>
+            <div class="row g-3">
+                <div class="col-7">
+                    <input class="form-control form-control-lg" placeholder="20자 이내로 적어주세요." type="text" name="content" id="content">
+                </div>    
+            </div>
+            
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <input type="submit" class="btn btn-primary" value="일기쓰기">
+        </div>
+        
+    </form>
 </div>
-<form method="POST" action="/">
-    <div>오늘의 날씨는 어땠습니까?</div>
-    <div>
-        <input type="radio" name="weather" id="sunny" value="sunny" required>
-        <label for="sunny">맑음</label>
 
-        <input type="radio" name="weather" id="cloudy" value="cloudy">
-        <label for="cloudy">흐림</label>
-
-        <input type="radio" name="weather" id="snowy" value="snowy">
-        <label for="snowy">눈</label>
-
-        <input type="radio" name="weather" id="foggy" value="foggy">
-        <label for="foggy">안개</label>
-
-        <input type="radio" name="weather" id="rainy" value="rainy">
-        <label for="rainy">비</label>
-
-        <input type="radio" name="weather" id="hail" value="hail">
-        <label for="hail">우박</label>
-    </div>
-
-
-
-    <div>오늘의 감정은 어땠습니까?</div>
-    <div>
-        <input type="radio" name="mood" id="happy" value="happy" required>
-        <label class="form-check-label" for="happy">행복</label>
-
-        <input type="radio" name="mood" id="pleasure" value="pleasure">
-        <label class="form-check-label" for="pleasure">즐거움</label>
-
-        <input type="radio" name="mood" id="sad" value="sad">
-        <label class="form-check-label" for="sad">슬픔</label>
-
-        <input type="radio" name="mood" id="angry" value="angry">
-        <label class="form-check-label" for="angry">화남</label>
-
-        <input type="radio" name="mood" id="annoyed" value="annoyed">
-        <label class="form-check-label" for="annoyed">짜증남</label>
-
-        <input type="radio" name="mood" id="depression" value="depression">
-        <label class="form-check-label" for="depression">우울함</label>
-
-        <input type="radio" name="mood" id="lonely" value="lonely">
-        <label class="form-check-label" for="lonely">외로움</label>
-
-        <input type="radio" name="mood" id="nervous" value="nervous">
-        <label class="form-check-label" for="nervous">긴장됨</label>
-
-        <input type="radio" name="mood" id="excitement" value="excitement">
-        <label class="form-check-label" for="excitement">설렘</label>
-
-        <input type="radio" name="mood" id="hopeless" value="hopeless">
-        <label class="form-check-label" for="hopeless">절망적</label>
-    </div>
-    <div>
-        오늘 중요 사건을 20자 이내로 적으세요.
-    </div>
-    <div>
-        <input type="text" name="content" id="content" maxlength="20" required>
-    </div>
-    <input type="submit" value="제출">
-</form>
 {% endblock %}
